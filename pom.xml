@@ -14,7 +14,7 @@
 	</parent>
 	<groupId>course.sf</groupId>
 	<artifactId>sfg_pet_clinic_app</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>sfg_pet_clinic_app</name>
 	<description>https://github.com/pratikdk/springfw_pet_clinic_impl</description>
 	<properties>
@@ -43,7 +43,7 @@
 
 	<scm>
 		<developerConnection>scm:git:https://github.com/pratikdk/springfw_pet_clinic_impl.git</developerConnection>
-	  <tag>sfg_pet_clinic_app-0.0.1</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 </project>
