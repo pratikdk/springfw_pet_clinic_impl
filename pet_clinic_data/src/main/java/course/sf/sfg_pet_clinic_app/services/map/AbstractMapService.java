@@ -28,4 +28,8 @@ public abstract class AbstractMapService<T, ID> {
     public void delete(T object) {
         map.entrySet().removeIf(entry -> entry.getValue().equals(object));
     }
+
+    public void printSize() {
+        System.out.println(map.size());
+    }
 }
