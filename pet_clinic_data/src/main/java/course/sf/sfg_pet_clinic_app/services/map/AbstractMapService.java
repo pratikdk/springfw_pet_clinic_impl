@@ -1,12 +1,11 @@
 package course.sf.sfg_pet_clinic_app.services.map;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import course.sf.sfg_pet_clinic_app.model.BaseEntity;
 
-public abstract class AbstractMapService<T, ID> {
-    protected Map<ID, T> map = new HashMap<>();
+import java.util.*;
+
+public abstract class AbstractMapService<T extends BaseEntity, ID extends Long> {
+    protected Map<Long, T> map = new HashMap<>();
 
     public Set<T> findAll() {
         return new HashSet<>(map.values());
@@ -17,9 +16,18 @@ public abstract class AbstractMapService<T, ID> {
     }
 
     public T save(ID id, T object) {
+        if (object != null) {
+            if (object.getId() != null) {
+                object.setId(this.getNextId());
+            }
+            map.put(object.getId(), object);
+        } else {
+            throw new RuntimeException("Object to save cannot be null");
+        }
         map.put(id, object);
         return object;
     }
+
 
     public void deleteById(ID id) {
         map.remove(id);
@@ -29,7 +37,14 @@ public abstract class AbstractMapService<T, ID> {
         map.entrySet().removeIf(entry -> entry.getValue().equals(object));
     }
 
-    public void printSize() {
-        System.out.println(map.size());
+    private Long getNextId() {
+        Long nextId = null;
+
+        try {
+            nextId = Collections.max(map.keySet()) + 1;
+        } catch (NoSuchElementException ex) {
+            nextId = 1L;
+        }
+        return nextId;
     }
 }
