@@ -1,1 +1,5 @@
+course\sf\sfg_pet_clinic_app\controllers\VetController.class
+course\sf\sfg_pet_clinic_app\bootstrap_data\DataLoader1.class
+course\sf\sfg_pet_clinic_app\controllers\OwnerController.class
+course\sf\sfg_pet_clinic_app\controllers\IndexController.class
 course\sf\sfg_pet_clinic_app\SfgPetClinicAppApplication.class
