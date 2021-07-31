@@ -1,36 +1,43 @@
 package course.sf.sfg_pet_clinic_app.bootstrap_data;
 
-import course.sf.sfg_pet_clinic_app.model.Owner;
-import course.sf.sfg_pet_clinic_app.model.Pet;
-import course.sf.sfg_pet_clinic_app.model.PetType;
-import course.sf.sfg_pet_clinic_app.model.Vet;
-import course.sf.sfg_pet_clinic_app.services.OwnerService;
-import course.sf.sfg_pet_clinic_app.services.PetService;
-import course.sf.sfg_pet_clinic_app.services.PetTypeService;
-import course.sf.sfg_pet_clinic_app.services.VetService;
+import course.sf.sfg_pet_clinic_app.model.*;
+import course.sf.sfg_pet_clinic_app.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
 @Component
-public class DataLoader1 implements CommandLineRunner {
+public class DataLoader implements CommandLineRunner {
 
     private final OwnerService ownerService;
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final PetService petService;
+    private final SpecialityService specialityService;
 
-    public DataLoader1(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, PetService petService) {
+    public DataLoader(OwnerService ownerService, VetService vetService,
+                      PetTypeService petTypeService, PetService petService,
+                      SpecialityService specialityService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.petService = petService;
+        this.specialityService = specialityService;
     }
 
     @Override
     public void run(String... args) throws Exception {
 
+        int count = petTypeService.findAll().size();
+
+        if (count == 0) {
+            loadData();
+        }
+
+    }
+
+    public void loadData() {
         PetType dogPetType = new PetType();
         dogPetType.setName("Dog");
         PetType savedDogPetType = petTypeService.save(dogPetType);
@@ -85,6 +92,18 @@ public class DataLoader1 implements CommandLineRunner {
         System.out.println("Added Owners");
 
 
+        Speciality specialityA = new Speciality();
+        specialityA.setDescription("specialityA");
+
+        Speciality specialityB = new Speciality();
+        specialityB.setDescription("specialityB");
+
+        Speciality specialityC = new Speciality();
+        specialityC.setDescription("specialityC");
+
+        System.out.println("Added Specialities");
+
+
         Vet vet1 = new Vet();
         vet1.setId(1L);
         vet1.setFirstName("Vet_1 FN");
@@ -94,6 +113,12 @@ public class DataLoader1 implements CommandLineRunner {
         vet2.setId(2L);
         vet2.setFirstName("Vet_2 FN");
         vet2.setLastName("Vet_2 LN");
+
+        vet1.getSpecialities().add(specialityA);
+        vet2.getSpecialities().add(specialityB);
+        vet2.getSpecialities().add(specialityC);
+
+        System.out.println("Added specialities to Vets");
 
         vetService.save(vet1);
         vetService.save(vet2);
