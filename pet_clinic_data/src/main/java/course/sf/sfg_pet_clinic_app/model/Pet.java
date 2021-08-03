@@ -6,12 +6,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "pets")
 public class Pet extends BaseEntity {
     @Column(name = "name")
     private String name;
 
-    @Column
+    @OneToOne
     @JoinColumn(name = "pet_type_id")
     private PetType petType;
 
@@ -55,5 +54,13 @@ public class Pet extends BaseEntity {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public Set<Visit> getVisits() {
+        return visits;
+    }
+
+    public void setVisits(Set<Visit> visits) {
+        this.visits = visits;
     }
 }

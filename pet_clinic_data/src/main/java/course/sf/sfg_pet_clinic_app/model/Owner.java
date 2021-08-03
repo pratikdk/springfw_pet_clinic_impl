@@ -1,11 +1,13 @@
 package course.sf.sfg_pet_clinic_app.model;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "owners")
 public class Owner extends Person {
     @Column(name = "address")
     private String address;

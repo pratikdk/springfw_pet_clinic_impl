@@ -2,12 +2,9 @@ package course.sf.sfg_pet_clinic_app.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "specialities")
 public class Speciality extends BaseEntity{
-
     @Column(name = "description")
     private String description;
 

@@ -1,11 +1,13 @@
 package course.sf.sfg_pet_clinic_app.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "vets")
 public class Vet extends Person {
     @ManyToMany
     @JoinTable(name = "vet_speciality",

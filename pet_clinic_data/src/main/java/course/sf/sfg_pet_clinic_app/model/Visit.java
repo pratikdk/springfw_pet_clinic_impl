@@ -1,10 +1,12 @@
 package course.sf.sfg_pet_clinic_app.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "visits")
 public class Visit extends BaseEntity {
     @Column(name = "appointment_date")
     private LocalDate date;
