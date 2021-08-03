@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'error')}">
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+</head>
+<body>
+    <h1 th:text="'Error'">Error</h1>
+    <p th:text="${#request.getAttribute('javax.servlet.error.status_code')}"></p>
+</body>
+</html>
