@@ -15,15 +15,17 @@ public class DataLoader implements CommandLineRunner {
     private final PetTypeService petTypeService;
     private final PetService petService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
 
     public DataLoader(OwnerService ownerService, VetService vetService,
                       PetTypeService petTypeService, PetService petService,
-                      SpecialityService specialityService) {
+                      SpecialityService specialityService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.petService = petService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -78,7 +80,7 @@ public class DataLoader implements CommandLineRunner {
         owner2.setAddress("Owner_2 Address");
         owner2.setCity("Owner_2 City");
 
-        petDog.setOwner(owner1);
+        petDog.setOwner(owner1); // Cascade.all(owner->pet) updates pet entity
         owner1.getPets().add(petDog);
 
         petCat.setOwner(owner2);
@@ -101,7 +103,11 @@ public class DataLoader implements CommandLineRunner {
         Speciality specialityC = new Speciality();
         specialityC.setDescription("specialityC");
 
-        System.out.println("Added Specialities");
+        specialityService.save(specialityA);
+        specialityService.save(specialityB);
+        specialityService.save(specialityC);
+
+        System.out.println("Saved Specialities");
 
 
         Vet vet1 = new Vet();
@@ -124,5 +130,13 @@ public class DataLoader implements CommandLineRunner {
         vetService.save(vet2);
 
         System.out.println("Added Vets");
+
+
+        Visit catVisit = new Visit();
+        catVisit.setPet(savedPetCat);
+        catVisit.setDescription("Sneezy Cat");
+        catVisit.setDate(LocalDate.now());
+
+        visitService.save(catVisit);
     }
 }
